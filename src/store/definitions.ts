@@ -4,6 +4,19 @@ import { AlertVariants } from "@twilio-paste/core/alert";
 
 import { FileAttachmentConfig } from "../definitions";
 
+export type ClickableMessage = {
+    key: string;
+    message: string;
+};
+
+type MessageAttributes = {
+    clickableMessages: ClickableMessage[];
+};
+
+export type MessageWithAttributes = Message & {
+    attributes: MessageAttributes;
+};
+
 export enum EngagementPhase {
     PreEngagementForm = "PreEngagementForm",
     MessagingCanvas = "MessagingCanvas",
