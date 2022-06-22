@@ -50,6 +50,6 @@ describe("Conversation Ended", () => {
         const newChatButton = queryByText(newChatButtonText) as Element;
         fireEvent.click(newChatButton);
 
-        expect(changeEngagementPhaseSpy).toHaveBeenCalledWith({ phase: EngagementPhase.PreEngagementForm });
+        expect(changeEngagementPhaseSpy).toHaveBeenCalledWith({ phase: EngagementPhase.MessagingCanvas });
     });
 });

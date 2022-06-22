@@ -33,7 +33,7 @@ export function initSession({ token, conversationSid }: { token: string; convers
                 conversation = await conversationsClient.getConversationBySid(conversationSid);
             } catch (e) {
                 dispatch(addNotification(notifications.failedToInitSessionNotification("Couldn't load conversation")));
-                dispatch(changeEngagementPhase({ phase: EngagementPhase.PreEngagementForm }));
+                dispatch(changeEngagementPhase({ phase: EngagementPhase.MessagingCanvas }));
                 return;
             }
 

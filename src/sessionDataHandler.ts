@@ -101,13 +101,12 @@ export const sessionDataHandler = {
         return updatedSessionData;
     },
 
-    fetchAndStoreNewSession: async ({ formData }: { formData: Record<string, unknown> }) => {
+    fetchAndStoreNewSession: async () => {
         log.debug("sessionDataHandler: trying to create new session");
 
         let newTokenData;
-
         try {
-            newTokenData = await contactBackend<Token>("/initWebchat", { formData });
+            newTokenData = await contactBackend<Token>("/initWebchat");
         } catch (e) {
             throw Error("No results from server");
         }

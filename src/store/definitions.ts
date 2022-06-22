@@ -18,7 +18,6 @@ export type MessageWithAttributes = Message & {
 };
 
 export enum EngagementPhase {
-    PreEngagementForm = "PreEngagementForm",
     MessagingCanvas = "MessagingCanvas",
     Loading = "Loading"
 }

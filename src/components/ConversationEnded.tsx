@@ -12,7 +12,7 @@ export const ConversationEnded = () => {
     const dispatch = useDispatch();
     const handleClick = () => {
         sessionDataHandler.clear();
-        dispatch(changeEngagementPhase({ phase: EngagementPhase.PreEngagementForm }));
+        dispatch(changeEngagementPhase({ phase: EngagementPhase.MessagingCanvas }));
     };
 
     return (

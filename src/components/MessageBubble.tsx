@@ -105,7 +105,7 @@ export const MessageBubble = ({
 
     const author = users?.find((u) => u.identity === message.author)?.friendlyName || message.author;
 
-    const { clickableMessages } = (message as MessageWithAttributes).attributes;
+    const { clickableMessages } = (message as MessageWithAttributes).attributes || {};
 
     const sendClickableMessage = async (clickableMessage: ClickableMessage): Promise<void> => {
         if (!conversation) {
