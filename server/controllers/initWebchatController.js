@@ -65,7 +65,7 @@ const sendWelcomeMessage = (conversationSid, customerFriendlyName) => {
     return getTwilioClient()
         .conversations.conversations(conversationSid)
         .messages.create({
-            body: `Welcome ${customerFriendlyName}! Please enter your query to start with.`,
+            body: `Welcome ${customerFriendlyName}! How can we help you today.`,
             author: "Concierge"
         })
         .then(() => {
