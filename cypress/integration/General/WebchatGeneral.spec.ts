@@ -12,33 +12,6 @@ describe("Webchat Lite general scenario's", () => {
         cy.visit("/");
     });
 
-    it("FLEXEXP-107 - Webchat Lite - Pre-engagement data - Form input fields validation - Invalid email", () => {
-        PreEngagementChatForm.toggleWebchatExpanded();
-        PreEngagementChatForm.getStartChatButton().click();
-        PreEngagementChatForm.validateFormExist();
-        PreEngagementChatForm.validateFieldErrorMessage(
-            PreEngagementChatForm.getNameInput(),
-            Constants.EMPTY_FIELD_ERROR_MESSAGE
-        );
-        PreEngagementChatForm.getNameInput().type(Constants.CUSTOMER_NAME);
-        PreEngagementChatForm.getStartChatButton().click();
-        PreEngagementChatForm.validateFieldErrorMessage(
-            PreEngagementChatForm.getEmailInput(),
-            Constants.EMPTY_FIELD_ERROR_MESSAGE
-        );
-        PreEngagementChatForm.validateEmail();
-        PreEngagementChatForm.getEmailInput().clear();
-        PreEngagementChatForm.getEmailInput().type(Constants.CORRECT_EMAIL);
-        PreEngagementChatForm.getStartChatButton().click();
-        PreEngagementChatForm.validateFieldErrorMessage(
-            PreEngagementChatForm.getQueryTextarea(),
-            Constants.EMPTY_FIELD_ERROR_MESSAGE
-        );
-        PreEngagementChatForm.getQueryTextarea().type(Constants.CUSTOMER_WELCOME_TEXT);
-        PreEngagementChatForm.getEmailInput().clear();
-        PreEngagementChatForm.validateEmail();
-        PreEngagementChatForm.validateFormExist();
-    });
 
     it("FLEXEXP-106 - Webchat Lite - Pre-engagement data", function flexExp106() {
         PreEngagementChatForm.toggleWebchatExpanded();

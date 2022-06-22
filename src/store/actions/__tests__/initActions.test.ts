@@ -98,7 +98,7 @@ describe("Actions", () => {
             expect(initParticipantsListener).toHaveBeenCalledWith(conversation, expect.any(Function));
         });
 
-        it("revert back to preEngagementForm with an error notification if it fails to initialize session", async () => {
+        it("revert back to MessagingCanvas with an error notification if it fails to initialize session", async () => {
             jest.spyOn(Client, "create").mockResolvedValueOnce({} as Client);
             const innerDispatchSpy = jest.fn();
             jest.spyOn(mockStore, "dispatch").mockImplementation((callback: any) => callback(innerDispatchSpy));
@@ -111,7 +111,7 @@ describe("Actions", () => {
                 type: ACTION_ADD_NOTIFICATION
             });
             expect(innerDispatchSpy).toHaveBeenCalledWith({
-                payload: { currentPhase: "PreEngagementForm" },
+                payload: { currentPhase: EngagementPhase.MessagingCanvas },
                 type: ACTION_CHANGE_ENGAGEMENT_PHASE
             });
             jest.spyOn(mockStore, "dispatch").mockRestore();

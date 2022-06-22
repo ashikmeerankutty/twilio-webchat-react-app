@@ -65,7 +65,7 @@ const sendWelcomeMessage = (conversationSid, customerFriendlyName) => {
     return getTwilioClient()
         .conversations.conversations(conversationSid)
         .messages.create({
-            body: `Welcome ${customerFriendlyName}! An agent will be with you in just a moment.`,
+            body: `Welcome ${customerFriendlyName}! How can we help you today.`,
             author: "Concierge"
         })
         .then(() => {
@@ -79,7 +79,7 @@ const sendWelcomeMessage = (conversationSid, customerFriendlyName) => {
 const initWebchatController = async (request, response) => {
     logInitialAction("Initiating webchat");
 
-    const customerFriendlyName = request.body?.formData?.friendlyName || "Customer";
+    const customerFriendlyName =  request.body?.formData?.friendlyName || "Customer";
 
     let conversationSid;
     let identity;
@@ -95,13 +95,12 @@ const initWebchatController = async (request, response) => {
     // Generate token for customer
     const token = createToken(identity);
 
+    await sendWelcomeMessage(conversationSid, customerFriendlyName);
+
     // OPTIONAL — if user query is defined
     if (request.body?.formData?.query) {
         // use it to send a message in behalf of the user with the query as body
-        sendUserMessage(conversationSid, identity, request.body.formData.query).then(() =>
-            // and then send another message from Concierge, letting the user know that an agent will help them soon
-            sendWelcomeMessage(conversationSid, customerFriendlyName)
-        );
+        sendUserMessage(conversationSid, identity, request.body.formData.query);
     }
 
     response.send({

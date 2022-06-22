@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 
 import { MessagingCanvasPhase } from "./MessagingCanvasPhase";
 import { AppState, EngagementPhase } from "../store/definitions";
-import { PreEngagementFormPhase } from "./PreEngagementFormPhase";
 import { LoadingPhase } from "./LoadingPhase";
 import { EntryPoint } from "./EntryPoint";
 import { innerContainerStyles, outerContainerStyles } from "./styles/RootContainer.styles";
@@ -15,9 +14,8 @@ const getPhaseComponent = (phase: EngagementPhase) => {
             return <LoadingPhase />;
         case EngagementPhase.MessagingCanvas:
             return <MessagingCanvasPhase />;
-        case EngagementPhase.PreEngagementForm:
         default:
-            return <PreEngagementFormPhase />;
+            return <MessagingCanvasPhase />;
     }
 };
 
