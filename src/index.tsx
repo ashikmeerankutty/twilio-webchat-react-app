@@ -3,16 +3,25 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 
 import { store } from "./store/store";
-import { WebchatWidget } from "./components/WebchatWidget";
 import { sessionDataHandler } from "./sessionDataHandler";
 import { initConfig } from "./store/actions/initActions";
 import { ConfigState } from "./store/definitions";
 import { initLogger } from "./logger";
+import { WebchatWidget } from "./components/WebchatWidget";
 
 const defaultConfig: ConfigState = {
     serverUrl: "http://localhost:3001",
     theme: {
-        isLight: true
+        isLight: true,
+        overrides: {
+            backgroundColors: {
+                colorBackgroundPrimary: "rgb(11 96 45)",
+                colorBackgroundBodyInverse: "rgba(0,0,0,.5)"
+            },
+            textColors: {
+                colorTextBrandHighlight: "rgb(11 96 45)"
+            }
+        }
     },
     fileAttachment: {
         enabled: true,

@@ -2,7 +2,7 @@ import { BoxStyleProps } from "@twilio-paste/core/box";
 
 export const outerContainerStyles: BoxStyleProps = {
     position: "fixed",
-    bottom: "space50",
+    bottom: "space200",
     right: "space60",
     display: "flex",
     flexDirection: "column",

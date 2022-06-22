@@ -7,6 +7,7 @@ import { PreEngagementFormPhase } from "./PreEngagementFormPhase";
 import { LoadingPhase } from "./LoadingPhase";
 import { EntryPoint } from "./EntryPoint";
 import { innerContainerStyles, outerContainerStyles } from "./styles/RootContainer.styles";
+import { Website } from "./website/Website";
 
 const getPhaseComponent = (phase: EngagementPhase) => {
     switch (phase) {
@@ -28,6 +29,7 @@ export function RootContainer() {
 
     return (
         <Box>
+            <Website />
             <Box {...outerContainerStyles}>
                 {expanded && (
                     <Box data-test="root-container" {...innerContainerStyles}>
