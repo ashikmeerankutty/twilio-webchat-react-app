@@ -95,7 +95,7 @@ const initWebchatController = async (request, response) => {
     // Generate token for customer
     const token = createToken(identity);
 
-    sendWelcomeMessage(conversationSid, customerFriendlyName);
+    await sendWelcomeMessage(conversationSid, customerFriendlyName);
 
     // OPTIONAL — if user query is defined
     if (request.body?.formData?.query) {

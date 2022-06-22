@@ -14,7 +14,9 @@ export function WebchatWidget() {
     const dispatch = useDispatch();
 
     const createNewChatSession = useCallback(async () => {
-        const data = await sessionDataHandler.fetchAndStoreNewSession();
+        const urlParams = new URLSearchParams(window.location.search);
+        const params = Object.fromEntries(urlParams);
+        const data = await sessionDataHandler.fetchAndStoreNewSession(params);
         dispatch(initSession({ token: data.token, conversationSid: data.conversationSid }));
     }, [dispatch]);
 
