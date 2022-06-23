@@ -2,7 +2,7 @@ import { BoxStyleProps } from "@twilio-paste/core/box";
 
 export const containerStyles: BoxStyleProps = {
     border: "none",
-    backgroundColor: "colorBackgroundPrimaryStrong",
+    backgroundColor: "colorBackgroundPrimary",
     display: "flex",
     height: "sizeIcon90",
     width: "sizeIcon90",

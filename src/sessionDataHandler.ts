@@ -101,7 +101,7 @@ export const sessionDataHandler = {
         return updatedSessionData;
     },
 
-    fetchAndStoreNewSession: async (params: Record<string, string>) => {
+    fetchAndStoreNewSession: async (params?: Record<string, string>) => {
         log.debug("sessionDataHandler: trying to create new session");
 
         let newTokenData;

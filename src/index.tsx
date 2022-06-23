@@ -16,10 +16,13 @@ const defaultConfig: ConfigState = {
         overrides: {
             backgroundColors: {
                 colorBackgroundPrimary: "rgb(11 96 45)",
-                colorBackgroundBodyInverse: "rgba(0,0,0,.5)"
+                colorBackgroundBodyInverse: "rgba(0,0,0,.5)",
+                colorBackgroundStrong: "rgb(244, 244, 246)",
+                colorBackgroundPrimaryStronger: "rgb(8 112 50)"
             },
             textColors: {
-                colorTextBrandHighlight: "rgb(11 96 45)"
+                colorTextBrandHighlight: "rgb(11 96 45)",
+                colorTextNeutral: "gb(75, 86, 113)"
             }
         }
     },

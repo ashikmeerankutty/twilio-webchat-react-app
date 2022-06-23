@@ -3,17 +3,15 @@ import { TextStyleProps } from "@twilio-paste/core/text";
 
 export const containerStyles: BoxStyleProps = {
     display: "flex",
-    justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "colorBackgroundPrimaryStronger",
-    padding: "space20",
-    paddingTop: "space40",
-    paddingBottom: "space40",
+    columnGap: "space30",
+    backgroundColor: "colorBackgroundStrong",
+    paddingX: "space50",
+    paddingY: "space50",
     borderTopLeftRadius: "borderRadius20",
     borderTopRightRadius: "borderRadius20"
 };
 
 export const titleStyles: TextStyleProps = {
-    color: "colorTextWeakest",
-    paddingLeft: "space30"
+    color: "colorTextNeutral"
 };

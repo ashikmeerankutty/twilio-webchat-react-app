@@ -54,7 +54,8 @@ export function WebchatWidget() {
                 BUTTON: {
                     "&[aria-disabled='true'][color='colorTextLink']": {
                         color: "colorTextLinkWeak"
-                    }
+                    },
+                    boxShadow: "none!important" as "none"
                 }
             }}
             style={{ minHeight: "100%", minWidth: "100%" }}
