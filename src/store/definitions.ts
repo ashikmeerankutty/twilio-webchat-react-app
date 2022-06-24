@@ -19,7 +19,8 @@ export type MessageWithAttributes = Message & {
 
 export enum EngagementPhase {
     MessagingCanvas = "MessagingCanvas",
-    Loading = "Loading"
+    Loading = "Loading",
+    EndMessage = "EndMessage"
 }
 
 export type ChatState = {

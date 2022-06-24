@@ -9,20 +9,26 @@ import { ConfigState } from "./store/definitions";
 import { initLogger } from "./logger";
 import { WebchatWidget } from "./components/WebchatWidget";
 
+const primaryColor = "rgb(11 96 45)";
+
 const defaultConfig: ConfigState = {
     serverUrl: "http://localhost:3001",
     theme: {
         isLight: true,
         overrides: {
             backgroundColors: {
-                colorBackgroundPrimary: "rgb(11 96 45)",
+                colorBackgroundPrimary: primaryColor,
                 colorBackgroundBodyInverse: "rgba(0,0,0,.5)",
                 colorBackgroundStrong: "rgb(244, 244, 246)",
-                colorBackgroundPrimaryStronger: "rgb(8 112 50)"
+                colorBackgroundPrimaryStronger: "rgb(8 112 50)",
+                colorBackgroundPrimaryWeaker: "rgb(12 96 45 / 10%)"
             },
             textColors: {
-                colorTextBrandHighlight: "rgb(11 96 45)",
-                colorTextNeutral: "gb(75, 86, 113)"
+                colorTextBrandHighlight: primaryColor,
+                colorTextNeutral: "rgb(75, 86, 113)"
+            },
+            borderColors: {
+                colorBorderPrimary: primaryColor
             }
         }
     },

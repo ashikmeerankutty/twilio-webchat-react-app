@@ -55,7 +55,26 @@ export function WebchatWidget() {
                     "&[aria-disabled='true'][color='colorTextLink']": {
                         color: "colorTextLinkWeak"
                     },
-                    boxShadow: "none!important" as "none"
+                    variants: {
+                        primary: {
+                            boxShadow: "none",
+                            ":hover": {
+                                boxShadow: "none"
+                            }
+                        },
+                        secondary: {
+                            borderColor: "colorBorderPrimary",
+                            borderWidth: "borderWidth10",
+                            borderStyle: "solid",
+                            color: "colorTextBrandHighlight",
+                            boxShadow: "none",
+                            ":hover": {
+                                boxShadow: "none",
+                                color: "colorTextBrandHighlight",
+                                backgroundColor: "colorBackgroundPrimaryWeaker"
+                            }
+                        }
+                    }
                 }
             }}
             style={{ minHeight: "100%", minWidth: "100%" }}

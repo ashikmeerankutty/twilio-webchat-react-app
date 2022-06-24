@@ -7,6 +7,7 @@ import { LoadingPhase } from "./LoadingPhase";
 import { EntryPoint } from "./EntryPoint";
 import { innerContainerStyles, outerContainerStyles } from "./styles/RootContainer.styles";
 import { Website } from "./website/Website";
+import { EndMessagePhase } from "./EndMessagePhase";
 
 const getPhaseComponent = (phase: EngagementPhase) => {
     switch (phase) {
@@ -14,6 +15,8 @@ const getPhaseComponent = (phase: EngagementPhase) => {
             return <LoadingPhase />;
         case EngagementPhase.MessagingCanvas:
             return <MessagingCanvasPhase />;
+        case EngagementPhase.EndMessage:
+            return <EndMessagePhase />;
         default:
             return <MessagingCanvasPhase />;
     }
