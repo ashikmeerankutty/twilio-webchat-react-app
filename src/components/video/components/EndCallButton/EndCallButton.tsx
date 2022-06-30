@@ -15,12 +15,7 @@ export const EndCallButton: FC = () => {
                 borderRadius="borderRadiusCircle"
                 cursor="pointer"
             >
-                <CloseIcon
-                    color="colorTextBrandInverse"
-                    onClick={() => room?.disconnect()}
-                    decorative={true}
-                    title="Description of icon"
-                />
+                <CloseIcon color="colorTextBrandInverse" decorative={true} title="Description of icon" />
             </Box>
             <Text as="p">End Call</Text>
         </Box>
