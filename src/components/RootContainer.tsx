@@ -8,6 +8,9 @@ import { EntryPoint } from "./EntryPoint";
 import { innerContainerStyles, outerContainerStyles } from "./styles/RootContainer.styles";
 import { Website } from "./website/Website";
 import { EndMessagePhase } from "./EndMessagePhase";
+import { AppStateProvider } from "./video/state";
+import { VideoProvider } from "./video/components/VideoProvider/VideoProvider";
+import { VideoChatWidget } from "./video/components/VideoChatWidget/VideoChatWidget";
 
 const getPhaseComponent = (phase: EngagementPhase) => {
     switch (phase) {
@@ -29,16 +32,21 @@ export function RootContainer() {
     }));
 
     return (
-        <Box>
-            <Website />
-            <Box {...outerContainerStyles}>
-                {expanded && (
-                    <Box data-test="root-container" {...innerContainerStyles}>
-                        {getPhaseComponent(currentPhase)}
+        <AppStateProvider>
+            <VideoProvider>
+                <Box>
+                    <Website />
+                    <Box {...outerContainerStyles}>
+                        <VideoChatWidget />
+                        {expanded && (
+                            <Box data-test="root-container" {...innerContainerStyles}>
+                                {getPhaseComponent(currentPhase)}
+                            </Box>
+                        )}
+                        <EntryPoint />
                     </Box>
-                )}
-                <EntryPoint />
-            </Box>
-        </Box>
+                </Box>
+            </VideoProvider>
+        </AppStateProvider>
     );
 }

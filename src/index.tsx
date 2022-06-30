@@ -21,7 +21,8 @@ const defaultConfig: ConfigState = {
                 colorBackgroundBodyInverse: "rgba(0,0,0,.5)",
                 colorBackgroundStrong: "rgb(244, 244, 246)",
                 colorBackgroundPrimaryStronger: "rgb(8 112 50)",
-                colorBackgroundPrimaryWeaker: "rgb(12 96 45 / 10%)"
+                colorBackgroundPrimaryWeaker: "rgb(12 96 45 / 10%)",
+                colorBackgroundDarkest: "#111a24"
             },
             textColors: {
                 colorTextBrandHighlight: primaryColor,

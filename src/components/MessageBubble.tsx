@@ -24,6 +24,7 @@ import {
     clickableMessagesStyles,
     clickableMessagesListStyles
 } from "./styles/MessageBubble.styles";
+import { JoinMeeting } from "./video/components/JoinMeeting/JoinMeeting";
 
 const doubleDigit = (number: number) => `${number < 10 ? 0 : ""}${number}`;
 
@@ -105,7 +106,7 @@ export const MessageBubble = ({
 
     const author = users?.find((u) => u.identity === message.author)?.friendlyName || message.author;
 
-    const { clickableMessages } = (message as MessageWithAttributes).attributes || {};
+    const { clickableMessages, videoCallSettings } = (message as MessageWithAttributes).attributes || {};
 
     const sendClickableMessage = async (clickableMessage: ClickableMessage): Promise<void> => {
         if (!conversation) {
@@ -174,6 +175,7 @@ export const MessageBubble = ({
                     </Stack>
                 </Box>
             )}
+            {isLast && videoCallSettings && <JoinMeeting {...videoCallSettings} />}
             {read && (
                 <Flex hAlignContent="right" vAlignContent="center" marginTop="space20">
                     <Text as="p" {...readStatusStyles}>

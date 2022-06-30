@@ -11,6 +11,9 @@ export type ClickableMessage = {
 
 type MessageAttributes = {
     clickableMessages: ClickableMessage[];
+    videoCallSettings: {
+        roomName: string;
+    };
 };
 
 export type MessageWithAttributes = Message & {
