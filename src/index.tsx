@@ -12,7 +12,7 @@ import { WebchatWidget } from "./components/WebchatWidget";
 const primaryColor = "rgb(11 96 45)";
 
 const defaultConfig: ConfigState = {
-    serverUrl: "http://localhost:8082",
+    serverUrl: "http://localhost:3001",
     theme: {
         isLight: true,
         overrides: {
