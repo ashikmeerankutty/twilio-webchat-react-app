@@ -2,18 +2,34 @@ import { FC } from "react";
 import { Box, Button } from "@twilio-paste/core";
 import { CheckboxCheckIcon } from "@twilio-paste/icons/esm/CheckboxCheckIcon";
 import { CloseIcon } from "@twilio-paste/icons/esm/CloseIcon";
+import { useSelector } from "react-redux";
+import log from "loglevel";
 
 import { useRoomState } from "../../hooks/useRoomState";
 import { useAppState } from "../../state";
 import { useVideo } from "../VideoProvider/VideoProvider";
+import { AppState } from "../../../../store/definitions";
 
 interface JoinMeetingProps {
     roomName: string;
 }
 export const JoinMeeting: FC<JoinMeetingProps> = ({ roomName }) => {
     const { getToken } = useAppState();
+    const { conversation } = useSelector((state: AppState) => ({
+        conversation: state.chat.conversation
+    }));
     const { connect: connectVideo } = useVideo();
     const roomState = useRoomState();
+
+    const sendMessage = async (messageText: string) => {
+        if (!conversation) {
+            log.error("Failed sending message: no conversation found");
+            return;
+        }
+        let preparedMessage = conversation.prepareMessage();
+        preparedMessage = preparedMessage.setBody(messageText);
+        await preparedMessage.build().send();
+    };
 
     const handleJoin = async () => {
         if (!roomName) {
@@ -24,6 +40,11 @@ export const JoinMeeting: FC<JoinMeetingProps> = ({ roomName }) => {
             return;
         }
         await connectVideo(token);
+        sendMessage("Call accepted");
+    };
+
+    const onReject = async () => {
+        sendMessage("Call Declined");
     };
 
     return (
@@ -33,7 +54,7 @@ export const JoinMeeting: FC<JoinMeetingProps> = ({ roomName }) => {
                     <Button variant="secondary" onClick={handleJoin}>
                         <CheckboxCheckIcon decorative title="Accept call" /> Accept
                     </Button>
-                    <Button variant="destructive_secondary">
+                    <Button onClick={onReject} variant="destructive_secondary">
                         <CloseIcon decorative title="Decline call" /> Decline
                     </Button>
                 </Box>
