@@ -13,8 +13,11 @@ export const useParticipants = () => {
             const participantConnected = (participant: RemoteParticipant) => {
                 setParticipants((prevParticipants) => [...prevParticipants, participant]);
             };
-            const participantDisconnected = (participant: RemoteParticipant) =>
+            const participantDisconnected = (participant: RemoteParticipant) => {
                 setParticipants((prevParticipants) => prevParticipants.filter((p) => p !== participant));
+                // When participant is disconnected disconnect the room
+                room.disconnect();
+            };
             room.on("participantConnected", participantConnected);
             room.on("participantDisconnected", participantDisconnected);
             return () => {
