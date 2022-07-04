@@ -1,4 +1,4 @@
-import { Box } from "@twilio-paste/core";
+import { Box, Text } from "@twilio-paste/core";
 import { FC } from "react";
 import { RemoteParticipant } from "twilio-video";
 
@@ -29,6 +29,13 @@ export const Participants: FC = () => {
                         <Participant participant={room.localParticipant} />{" "}
                     </Box>
                 )}
+                {participants.length === 0 ? (
+                    <Box display="flex" justifyContent="center" width="100%">
+                        <Text textAlign="center" as="p" color="colorTextBrandInverse">
+                            Waiting for others to join...
+                        </Text>
+                    </Box>
+                ) : null}
                 {participants.map((participant: RemoteParticipant) => {
                     return <Participant key={participant.sid} participant={participant} />;
                 })}

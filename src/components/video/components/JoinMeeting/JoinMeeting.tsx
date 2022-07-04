@@ -40,11 +40,11 @@ export const JoinMeeting: FC<JoinMeetingProps> = ({ roomName }) => {
             return;
         }
         await connectVideo(token);
-        sendMessage("Call accepted");
+        sendMessage("Call started");
     };
 
     const onReject = async () => {
-        sendMessage("Call Declined");
+        sendMessage("Call declined");
     };
 
     return (
