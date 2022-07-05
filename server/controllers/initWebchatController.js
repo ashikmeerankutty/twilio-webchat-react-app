@@ -1,4 +1,5 @@
 const axios = require("axios");
+
 const { createToken } = require("../helpers/createToken");
 const { TOKEN_TTL_IN_SECONDS } = require("../constants");
 const { getTwilioClient } = require("../helpers/getTwilioClient");
@@ -79,7 +80,7 @@ const sendWelcomeMessage = (conversationSid, customerFriendlyName) => {
 const initWebchatController = async (request, response) => {
     logInitialAction("Initiating webchat");
 
-    const customerFriendlyName =  request.body?.formData?.friendlyName || "Customer";
+    const customerFriendlyName = request.body?.formData?.friendlyName || "Customer";
 
     let conversationSid;
     let identity;
@@ -110,6 +111,7 @@ const initWebchatController = async (request, response) => {
     });
 
     logFinalAction("Webchat successfully initiated");
+    return null;
 };
 
 module.exports = { initWebchatController };
