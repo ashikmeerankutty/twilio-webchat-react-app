@@ -35,7 +35,6 @@ export const EndCallButton: FC = () => {
             >
                 <CloseIcon color="colorTextBrandInverse" decorative={true} title="Description of icon" />
             </Box>
-            <Text as="p">End Call</Text>
         </Box>
     );
 };
