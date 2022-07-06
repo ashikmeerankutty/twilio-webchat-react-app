@@ -1,4 +1,4 @@
-import { Box, Text } from "@twilio-paste/core";
+import { Box } from "@twilio-paste/core";
 import { CloseIcon } from "@twilio-paste/icons/esm/CloseIcon";
 import log from "loglevel";
 import { FC } from "react";
