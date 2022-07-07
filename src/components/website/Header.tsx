@@ -1,148 +1,166 @@
-import { Box, Flex, Stack } from "@twilio-paste/core";
-import { CloseIcon } from "@twilio-paste/icons/esm/CloseIcon";
-import { FC, useState } from "react";
+/* eslint-disable react/jsx-max-depth */
+import { Anchor, Box, Column, Grid, Text } from "@twilio-paste/core";
+import { FC } from "react";
 
-import OwlIconImage from "../../assets/owl-icon.png";
-import { MenuIcon } from "./MenuIcon";
-
-const navbarItems = [
-    {
-        key: "savings",
-        name: "Savings"
-    },
-    {
-        key: "creditCards",
-        name: "Credit Cards"
-    },
-    {
-        key: "autoLoans",
-        name: "Auto Loans"
-    },
-    {
-        key: "homeLoans",
-        name: "Home Loans"
-    },
-    {
-        key: "buisiness",
-        name: "Buisiness"
-    },
-    {
-        key: "investing",
-        name: "Investing"
-    }
-];
+import profileImage from "../../assets/profile-user.jpeg";
+import iconBBa from "../../assets/icon-cta-bba.svg";
+import iconDme from "../../assets/icon-cta-dme.svg";
+import iconContact from "../../assets/icon-cta-contact.svg";
 
 export const Header: FC = () => {
-    const [showResponsiveMenu, setShowResponsiveMenu] = useState<boolean>(false);
     return (
-        <Box as="div" backgroundColor="colorBackgroundPrimary">
-            <Flex
-                maxWidth={1280}
-                marginX="auto"
-                hAlignContent="between"
-                vAlignContent="center"
-                padding="space40"
-                height={64}
-                width="100%"
-            >
-                <Box as="img" src={OwlIconImage} alt="logo" height="100%" />
-                <Box width="100%" display={["none", "none", "block"]}>
-                    <Flex hAlignContent="right" vAlignContent="center">
-                        <Flex marginX="space100">
-                            {navbarItems.map(({ key, name }) => (
-                                <Box
-                                    as="button"
-                                    paddingX="space60"
-                                    paddingY="space50"
-                                    key={key}
-                                    border="none"
-                                    backgroundColor="transparent"
-                                    cursor="pointer"
-                                    color="colorTextInverse"
-                                    opacity="0.7"
-                                    textTransform="uppercase"
-                                >
-                                    {name}
-                                </Box>
-                            ))}
-                        </Flex>
-                        <Box
-                            backgroundColor="transparent"
-                            borderColor="colorBorderInverseStrongest"
-                            color="colorTextInverse"
-                            as="button"
-                            borderWidth="borderWidth10"
-                            borderRadius="borderRadius20"
-                            padding="space40"
-                            borderStyle="solid"
-                            cursor="pointer"
-                        >
-                            SIGN IN
+        <Box as="section" id="home" width="100%">
+            <Box backgroundColor="colorBackgroundBody" position="fixed" top="0" width="100%">
+                <Box
+                    paddingX="space70"
+                    paddingY="space40"
+                    backgroundColor="colorBackgroundStrong"
+                    display="flex"
+                    columnGap="space30"
+                    height="44px"
+                >
+                    <Text as="h4">OWL Bank Coronavirus Resource Center</Text>
+                    <Anchor href="#">
+                        <Text color="inherit" fontWeight="fontWeightBold" as="p">
+                            See Details
+                        </Text>
+                    </Anchor>
+                </Box>
+                <Box width="calc(100% - 8.332%);" paddingX="space70" paddingY="space70">
+                    <Box display="flex" justifyContent="space-between">
+                        <Text as="h3">OWL BANK</Text>
+                        <Box display="flex" columnGap="space30">
+                            <Anchor href="#">
+                                <Text color="inherit" fontWeight="fontWeightBold" as="p">
+                                    Log in
+                                </Text>
+                            </Anchor>
+                            <Text as="p">to manage your loan</Text>
                         </Box>
-                    </Flex>
+                    </Box>
                 </Box>
-                <Box
-                    as="button"
-                    cursor="pointer"
-                    backgroundColor="transparent"
-                    border="none"
-                    display={["block", "block", "none"]}
-                    onClick={() => setShowResponsiveMenu(!showResponsiveMenu)}
-                >
-                    {showResponsiveMenu ? (
-                        <CloseIcon color="colorTextBrandInverse" decorative={false} title="Close" />
-                    ) : (
-                        <MenuIcon />
-                    )}
-                </Box>
-                <Box
-                    backgroundColor="colorBackgroundPrimary"
-                    position="fixed"
-                    width="100%"
-                    top={64}
-                    left={0}
-                    height={showResponsiveMenu ? "auto" : 0}
-                    overflow="hidden"
-                    zIndex="zIndex90"
-                >
-                    <Stack orientation="vertical" spacing="space30">
-                        {navbarItems.map(({ key, name }) => (
-                            <Box key={key} textAlign="center">
-                                <Box
-                                    as="button"
-                                    paddingX="space60"
-                                    paddingY="space50"
-                                    border="none"
-                                    backgroundColor="transparent"
+            </Box>
+            <Box style={{ marginTop: "112px" }} paddingX="space70" paddingY="space40">
+                <Grid gutter="space30" paddingY="space40">
+                    <Column span={7}>
+                        <Box display="flex" columnGap="space80">
+                            <Box maxWidth="120px" objectFit="cover" as="img" src={profileImage} />
+                            <Box display="flex" flexDirection="column" rowGap="space40">
+                                <Text fontWeight="fontWeightNormal" fontSize="fontSize80" as="h1">
+                                    Jason Lockhart
+                                </Text>
+                                {["Credit Solutions Advisor", "NMLS ID: 1197973", "415.941.4036"].map((detail) => {
+                                    return (
+                                        <Text
+                                            style={{ fontWeight: 300 }}
+                                            color="colorTextWeak"
+                                            fontSize="fontSize60"
+                                            key={detail}
+                                            as="p"
+                                        >
+                                            {detail}
+                                        </Text>
+                                    );
+                                })}
+                                <Text
+                                    as="a"
+                                    fontSize="fontSize60"
                                     cursor="pointer"
-                                    color="colorTextInverse"
-                                    opacity="0.7"
-                                    textAlign="center"
-                                    textTransform="uppercase"
+                                    _hover={{ textDecoration: "underline" }}
+                                    style={{ fontWeight: 300 }}
+                                    color="colorTextLink"
                                 >
-                                    {name}
-                                </Box>
-                            </Box>
-                        ))}
-                        <Box textAlign="center" marginBottom="space100">
-                            <Box
-                                backgroundColor="transparent"
-                                as="button"
-                                borderWidth="borderWidth10"
-                                borderRadius="borderRadius20"
-                                padding="space40"
-                                borderStyle="solid"
-                                cursor="pointer"
-                                marginX="space50"
-                                borderColor="colorBorderInverseStrongest"
-                                color="colorTextInverse"
-                            >
-                                SIGN IN
+                                    1640 Van Ness Ave, San Francisco, CA 94109
+                                </Text>
                             </Box>
                         </Box>
-                    </Stack>
-                </Box>
-            </Flex>
+                        <Box marginY="space80" paddingTop="space30">
+                            <Text fontSize="fontSize60" lineHeight="lineHeight40" style={{ fontWeight: 300 }} as="p">
+                                I&apos;m Jason, and I&apos;m dedicated to helping people find the home loan that
+                                comfortably fits their needs in the San Francisco area. As a President&apos;s Club
+                                member and a trusted partner to many people in this community, I&apos;m here to guide
+                                you through every step of the home loan process. Call me today if you&apos;re ready to
+                                get started or would like more information.
+                            </Text>
+                        </Box>
+                    </Column>
+                    <Column span={5}>
+                        <Box paddingX="space100" paddingY="space80" backgroundColor="colorBackgroundPrimaryLightest">
+                            <Text as="h3" style={{ fontWeight: 400 }} textAlign="center" fontSize="fontSize60">
+                                Many ways to apply
+                            </Text>
+                            <Grid marginTop="space70" gutter="space30">
+                                <Column>
+                                    <Box
+                                        display="flex"
+                                        flexDirection="column"
+                                        alignItems="center"
+                                        justifyContent="center"
+                                        cursor="pointer"
+                                        className="contact-card"
+                                    >
+                                        <Box marginBottom="space30" maxHeight="24px" as="img" src={iconDme} />
+                                        <Box width="100px">
+                                            <Text
+                                                className="contact-card-item"
+                                                fontSize="fontSize40"
+                                                textAlign="center"
+                                                as="p"
+                                            >
+                                                Get Started
+                                            </Text>
+                                        </Box>
+                                    </Box>
+                                </Column>
+                                <Column display="flex">
+                                    <Box
+                                        display="flex"
+                                        alignItems="center"
+                                        flexDirection="column"
+                                        justifyContent="center"
+                                        cursor="pointer"
+                                        className="contact-card"
+                                    >
+                                        <Box marginBottom="space30" maxHeight="24px" as="img" src={iconBBa} />
+                                        <Box width="100px">
+                                            <Text
+                                                className="contact-card-item"
+                                                fontSize="fontSize40"
+                                                textAlign="center"
+                                                as="p"
+                                            >
+                                                Schedule an appointment
+                                            </Text>
+                                        </Box>
+                                    </Box>
+                                </Column>
+                                <Column>
+                                    <Box
+                                        display="flex"
+                                        alignItems="center"
+                                        flexDirection="column"
+                                        justifyContent="center"
+                                        cursor="pointer"
+                                        className="contact-card"
+                                    >
+                                        <Box marginBottom="space30" maxHeight="24px" as="img" src={iconContact} />
+                                        <Box width="100px">
+                                            <Text
+                                                className="contact-card-item"
+                                                fontSize="fontSize40"
+                                                textAlign="center"
+                                                as="p"
+                                            >
+                                                Get a callback from me
+                                            </Text>
+                                        </Box>
+                                    </Box>
+                                </Column>
+                            </Grid>
+                        </Box>
+                    </Column>
+                </Grid>
+            </Box>
         </Box>
     );
 };

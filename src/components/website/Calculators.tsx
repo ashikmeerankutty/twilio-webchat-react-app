@@ -79,7 +79,7 @@ export const Calculators: FC = () => {
                 </Box>
                 <Box maxWidth="80%">
                     <Grid marginTop="space100" gutter="space20">
-                        {calculators.map(({ displayText, icon, size }) => {
+                        {calculators.map(({ displayText, icon, size, description, cta }) => {
                             return (
                                 <Column key={displayText}>
                                     <Box
@@ -88,14 +88,42 @@ export const Calculators: FC = () => {
                                         display="flex"
                                         flexDirection="column"
                                         justifyContent="flex-end"
-                                        minHeight="150px"
-                                        padding="space50"
+                                        className="flip-card"
                                     >
-                                        <Box height={`${size}px`} width={`${size}px`} as="img" src={icon} />
-                                        <Box marginTop="space20" maxWidth="100px">
-                                            <Text style={{ fontWeight: 300 }} fontSize="fontSize50" as="p">
-                                                {displayText}
-                                            </Text>
+                                        <Box className="flip-card-inner">
+                                            <Box
+                                                padding="space50"
+                                                display="flex"
+                                                flexDirection="column"
+                                                justifyContent="flex-end"
+                                                className="flip-card-front"
+                                                height="150px"
+                                                backgroundColor="colorBackground"
+                                            >
+                                                <Box height={`${size}px`} width={`${size}px`} as="img" src={icon} />
+                                                <Box marginTop="space20" maxWidth="100px">
+                                                    <Text style={{ fontWeight: 300 }} fontSize="fontSize50" as="p">
+                                                        {displayText}
+                                                    </Text>
+                                                </Box>
+                                            </Box>
+                                            <Box
+                                                backgroundColor="colorBackgroundDestructive"
+                                                padding="space50"
+                                                height="150px"
+                                                className="flip-card-back"
+                                                display="flex"
+                                                flexDirection="column"
+                                                alignItems="start"
+                                                justifyContent="center"
+                                            >
+                                                <Text color="colorTextBrandInverse" as="p">
+                                                    {description}
+                                                </Text>
+                                                <Text fontWeight="fontWeightBold" color="colorTextBrandInverse" as="p">
+                                                    {cta}
+                                                </Text>
+                                            </Box>
                                         </Box>
                                     </Box>
                                 </Column>
