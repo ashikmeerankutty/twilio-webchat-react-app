@@ -58,6 +58,7 @@ export function WebchatWidget() {
                     variants: {
                         primary: {
                             boxShadow: "none",
+                            fontWeight: "fontWeightLight",
                             ":hover": {
                                 boxShadow: "none"
                             }

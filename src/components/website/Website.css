@@ -1,0 +1,33 @@
+@font-face {
+    font-family: "Connections";
+    src: url("../../assets/fonts/cnx-regular.woff");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Connections";
+    src: url("../../assets/fonts/cnx-italic.woff");
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Connections";
+    src: url("../../assets/fonts/cnx-bold.woff");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Connections";
+    src: url("../../assets/fonts/cnx-light.woff");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Connections";
+    src: url("../../assets/fonts/cnx-medium.woff");
+    font-weight: 500;
+}
+
+* {
+    font-family: "Connections", Helvetica Neue, Helvetica, Arial, sans-serif !important;
+}
