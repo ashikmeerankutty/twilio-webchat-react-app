@@ -10,7 +10,7 @@ import iconContact from "../../assets/icon-cta-contact.svg";
 export const Header: FC = () => {
     return (
         <Box as="section" id="home" width="100%">
-            <Box backgroundColor="colorBackgroundBody" position="fixed" top="0" width="100%">
+            <Box zIndex="zIndex20" backgroundColor="colorBackgroundBody" position="fixed" top="0" width="100%">
                 <Box
                     paddingX="space70"
                     paddingY="space40"
@@ -47,7 +47,7 @@ export const Header: FC = () => {
                             <Box maxWidth="120px" objectFit="cover" as="img" src={profileImage} />
                             <Box display="flex" flexDirection="column" rowGap="space40">
                                 <Text fontWeight="fontWeightNormal" fontSize="fontSize80" as="h1">
-                                    Jason Lockhart
+                                    John Lockhart
                                 </Text>
                                 {["Credit Solutions Advisor", "NMLS ID: 1197973", "415.941.4036"].map((detail) => {
                                     return (
@@ -76,7 +76,7 @@ export const Header: FC = () => {
                         </Box>
                         <Box marginY="space80" paddingTop="space30">
                             <Text fontSize="fontSize60" lineHeight="lineHeight40" style={{ fontWeight: 300 }} as="p">
-                                I&apos;m Jason, and I&apos;m dedicated to helping people find the home loan that
+                                I&apos;m John, and I&apos;m dedicated to helping people find the home loan that
                                 comfortably fits their needs in the San Francisco area. As a President&apos;s Club
                                 member and a trusted partner to many people in this community, I&apos;m here to guide
                                 you through every step of the home loan process. Call me today if you&apos;re ready to

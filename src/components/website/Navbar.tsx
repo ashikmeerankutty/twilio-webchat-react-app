@@ -95,7 +95,7 @@ export const Navbar: FC = () => {
             display="flex"
             flexDirection="column"
             height="100vh"
-            zIndex="zIndex10"
+            zIndex="zIndex40"
         >
             {navbarItems.map(({ display, icon, iconWhite, id }) => {
                 const isActive = id === activeSection;
