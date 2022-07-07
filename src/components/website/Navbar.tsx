@@ -91,11 +91,12 @@ export const Navbar: FC = () => {
         <Box
             style={{ boxShadow: "2px 2px 6px rgb(0 0 0 / 15%)" }}
             position="fixed"
-            width="8.32%"
+            width="110px"
             display="flex"
             flexDirection="column"
             height="100vh"
             zIndex="zIndex40"
+            backgroundColor="colorBackground"
         >
             {navbarItems.map(({ display, icon, iconWhite, id }) => {
                 const isActive = id === activeSection;

@@ -1,4 +1,4 @@
-import { Box, Column, Grid } from "@twilio-paste/core";
+import { Box, Column, Flex, Grid } from "@twilio-paste/core";
 import { FC } from "react";
 import "./Website.css";
 
@@ -12,11 +12,11 @@ import { Navbar } from "./Navbar";
 
 export const Website: FC = () => {
     return (
-        <Grid>
-            <Column span={1}>
+        <Flex>
+            <Box>
                 <Navbar />
-            </Column>
-            <Column span={11}>
+            </Box>
+            <Box style={{ paddingLeft: "110px" }}>
                 <Box>
                     <Header />
                     <Calculators />
@@ -25,7 +25,7 @@ export const Website: FC = () => {
                     <WhatsNew />
                     <Footer />
                 </Box>
-            </Column>
-        </Grid>
+            </Box>
+        </Flex>
     );
 };
