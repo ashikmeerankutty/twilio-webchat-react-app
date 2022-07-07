@@ -14,6 +14,9 @@ const defaultConfig: ConfigState = {
     theme: {
         isLight: true,
         overrides: {
+            backgroundColors: {
+                colorBackgroundInverseStrong: "#111a24",
+            },
             textColors: {
                 colorTextBrandHighlight: "rgb(2, 99, 224)",
                 colorTextNeutral: "rgb(75, 86, 113)"

@@ -3,13 +3,20 @@ import { FC } from "react";
 import { RemoteParticipant } from "twilio-video";
 
 import { useParticipants } from "../../hooks/useParticipants";
-import { EndCallButton } from "../EndCallButton/EndCallButton";
+import { useToggleAudio } from "../../hooks/useToggleAudio";
+import { EndCallIcon } from "../Icons/EndCallIcon";
+import { MuteIcon } from "../Icons/MuteIcon";
+import { UnMuteIcon } from "../Icons/UnMuteIcon";
+import { MenuBar } from "../Menubar/Menubar";
 import { Participant } from "../Participant/Participant";
 import { useVideo } from "../VideoProvider/VideoProvider";
 
 export const Participants: FC = () => {
     const participants = useParticipants();
     const { room } = useVideo();
+
+    const { audioMuted, onToggleAudio } = useToggleAudio();
+
 
     return (
         <Box
@@ -40,9 +47,24 @@ export const Participants: FC = () => {
                     return <Participant key={participant.sid} participant={participant} />;
                 })}
             </Box>
-            <Box display="flex" justifyContent="center" padding="space50" backgroundColor="colorBackgroundBody">
-                <EndCallButton />
-            </Box>
+            <MenuBar
+                menuItems={[
+                    {
+                        onClick: onToggleAudio,
+                        text: `${audioMuted ? "Unmute" : "Mute"}`,
+                        icon: audioMuted ? MuteIcon : UnMuteIcon
+                    },
+                    {
+                        onClick: () => {
+                            room!.disconnect();
+                        },
+                        text: "End Call",
+                        icon: EndCallIcon,
+                        iconBackground: "colorBackgroundDestructive",
+                        iconColor: "colorTextBrandInverse"
+                    },
+                ]}
+            />
         </Box>
     );
 };
