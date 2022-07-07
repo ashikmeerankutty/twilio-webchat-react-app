@@ -22,7 +22,7 @@ const cards = [
 
 export const WhatsNew: FC = () => {
     return (
-        <Box paddingX="space70" paddingY="space200" paddingBottom="space200">
+        <Box as="section" id="whats-new" paddingX="space70" paddingY="space200" paddingBottom="space200">
             <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
                 <Text style={{ fontWeight: 300 }} fontSize="fontSize110" textAlign="center" as="h3">
                     Find out what&apos;s new

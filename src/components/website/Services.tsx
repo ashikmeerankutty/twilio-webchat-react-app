@@ -1,4 +1,4 @@
-import { Anchor, Box, Column, Grid, Text } from "@twilio-paste/core";
+import { Box, Column, Grid, Text } from "@twilio-paste/core";
 import { FC } from "react";
 
 import ServiceBg from "../../assets/graphic-resources.svg";
@@ -28,7 +28,7 @@ const services = [
 
 export const Services: FC = () => {
     return (
-        <Box paddingX="space70" paddingY="space150">
+        <Box as="section" id="services" paddingX="space70" paddingY="space150">
             <Grid>
                 <Column>
                     <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">

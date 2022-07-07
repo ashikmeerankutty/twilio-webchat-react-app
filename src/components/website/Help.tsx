@@ -33,6 +33,8 @@ const helps = [
 export const Help: FC = () => {
     return (
         <Box
+            as="section"
+            id="help"
             backgroundImage={`url(${backgroundImage})`}
             backgroundRepeat="no-repeat"
             backgroundSize="cover"

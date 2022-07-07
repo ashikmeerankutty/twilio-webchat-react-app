@@ -9,25 +9,30 @@ import iconContact from "../../assets/icon-cta-contact.svg";
 
 export const TopHeader: FC = () => {
     return (
-        <Box>
-            <Box
-                paddingX="space70"
-                paddingY="space40"
-                backgroundColor="colorBackgroundStrong"
-                display="flex"
-                columnGap="space30"
-            >
-                <Text as="h4">OWL Bank Coronavirus Resource Center</Text>
-                <Anchor href="#">See Details</Anchor>
-            </Box>
-            <Box paddingX="space70" paddingY="space40">
-                <Box display="flex" paddingBottom="space100" justifyContent="space-between">
-                    <Text as="h3">OWL BANK</Text>
-                    <Box display="flex" columnGap="space30">
-                        <Anchor href="#">Log in</Anchor>
-                        <Text as="p">to manage your loan</Text>
+        <Box as="section" id="home" width="100%">
+            <Box backgroundColor="colorBackgroundBody" position="fixed" top="0" width="100%">
+                <Box
+                    paddingX="space70"
+                    paddingY="space40"
+                    backgroundColor="colorBackgroundStrong"
+                    display="flex"
+                    columnGap="space30"
+                    height="44px"
+                >
+                    <Text as="h4">OWL Bank Coronavirus Resource Center</Text>
+                    <Anchor href="#">See Details</Anchor>
+                </Box>
+                <Box width="calc(100% - 8.332%);" paddingX="space70" paddingY="space70">
+                    <Box display="flex" justifyContent="space-between">
+                        <Text as="h3">OWL BANK</Text>
+                        <Box display="flex" columnGap="space30">
+                            <Anchor href="#">Log in</Anchor>
+                            <Text as="p">to manage your loan</Text>
+                        </Box>
                     </Box>
                 </Box>
+            </Box>
+            <Box style={{ marginTop: "112px" }} paddingX="space70" paddingY="space40">
                 <Grid gutter="space30" paddingY="space40">
                     <Column span={7}>
                         <Box display="flex" columnGap="space80">

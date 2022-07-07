@@ -38,7 +38,7 @@ const calculators = [
         size: 26
     },
     {
-        displayText: "Home equity calculator",
+        displayText: "Home value estimator",
         description: "Find out estimated payments and rates for a HELOC.",
         cta: "Calculate",
         icon: calcualatorEstimator,
@@ -49,6 +49,8 @@ const calculators = [
 export const Calculators: FC = () => {
     return (
         <Box
+            as="section"
+            id="calculators"
             paddingX="space70"
             style={{
                 paddingTop: "60px",

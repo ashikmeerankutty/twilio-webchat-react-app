@@ -6,7 +6,7 @@ import footerBackground from "../../assets/footer-background.svg";
 
 export const MainFooter: FC = () => {
     return (
-        <Box>
+        <Box as="section" id="footer">
             <Box
                 height="56px"
                 backgroundRepeat="no-repeat"
@@ -15,8 +15,8 @@ export const MainFooter: FC = () => {
                 backgroundImage={`url(${footerBackground})`}
             />
             <Box>
-                <ol>
-                    <li>
+                <Box as="ol">
+                    <Box paddingRight="space60" fontSize="fontSize20" as="li">
                         The origination fee reduction and/or interest rate reductions are offered to clients who are
                         enrolled or are eligible to enroll in Preferred Rewards, based on their rewards tier at the
                         submittal of a loan application for a new purchase or refinance loan (for co-borrowers, at least
@@ -75,23 +75,27 @@ export const MainFooter: FC = () => {
                         days of your enrollment, or for new accounts within 30 days of account opening, unless we
                         indicate otherwise. Certain benefits are also available without enrolling in Preferred Rewards
                         if you satisfy balance and other requirements.
-                    </li>
-                    <li>
+                    </Box>
+                    <Box fontSize="fontSize20" as="li">
                         Mobile banking requires that you download the Mobile Banking app and is only available for
                         select mobile devices. Message and data rates may apply.
-                    </li>
-                </ol>
-                <Box paddingX="space60">
-                    <Text as="p">
+                    </Box>
+                </Box>
+                <Box paddingX="space60" marginBottom="space100" display="flex" flexDirection="column" rowGap="space30">
+                    <Text fontSize="fontSize20" as="p">
                         Credit and collateral are subject to approval. Terms and conditions apply. This is not a
                         commitment to lend. Programs, rates, terms and conditions are subject to change without notice.
                     </Text>
-                    <Text as="p">
+                    <Text fontSize="fontSize20" as="p">
                         Apple, the Apple logo, iPhone, and MacBook Air are trademarks of Apple Inc., registered in the
                         U.S. and other countries. App Store is a service mark of Apple Inc.
                     </Text>
-                    <Text as="p">Bank of America, N.A. Member FDIC. Equal Housing Lender Equal Housing Lender</Text>
-                    <Text as="p">© 2022 Bank of America Corporation. MAP4424393</Text>
+                    <Text fontSize="fontSize20" as="p">
+                        Bank of America, N.A. Member FDIC. Equal Housing Lender Equal Housing Lender
+                    </Text>
+                    <Text fontSize="fontSize20" as="p">
+                        © 2022 Bank of America Corporation. MAP4424393
+                    </Text>
                 </Box>
             </Box>
         </Box>

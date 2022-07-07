@@ -15,17 +15,14 @@ import iconMenuResources from "../../assets/icon-menu-resources.svg";
 import iconMenuResourcesWhite from "../../assets/icon-menu-resources-white.svg";
 import iconMenuRates from "../../assets/icon-menu-rates.svg";
 import iconMenuAgent from "../../assets/icon-menu-agent.svg";
+import { useScrollSpy } from "../hooks/useScrollSpy";
 
 const navbarItems = [
     {
         display: "Home",
         icon: iconMenuHome,
-        iconWhite: iconMenuHomeWhite
-    },
-    {
-        display: "Mortgage Calculator",
-        icon: iconMenuCalculators,
-        iconWhite: iconMenuCalculatorsWhite
+        iconWhite: iconMenuHomeWhite,
+        id: "home"
     },
     {
         display: "Current Mortgage Rates",
@@ -34,29 +31,33 @@ const navbarItems = [
         iconWhite: iconMenuRates
     },
     {
+        display: "Mortgage Calculator",
+        icon: iconMenuCalculators,
+        iconWhite: iconMenuCalculatorsWhite,
+        id: "calculators"
+    },
+    {
         display: "Resources",
         icon: iconMenuResources,
-        iconWhite: iconMenuResourcesWhite
+        iconWhite: iconMenuResourcesWhite,
+        id: "services"
     },
     {
         display: "Benefits",
         icon: iconMenuBenefits,
-        iconWhite: iconMenuBenefitsWhite
+        iconWhite: iconMenuBenefitsWhite,
+        id: "help"
     },
     {
         display: "Home Outlook",
         icon: iconMenuHomeOutlook,
-        iconWhite: iconMenuHomeOutlookWhite
+        iconWhite: iconMenuHomeOutlookWhite,
+        id: "whats-new"
     },
     {
         display: "Property Alert",
         icon: iconMenuProperties,
         iconWhite: iconMenuPropertiesWhite
-    },
-    {
-        display: "Home Outlook",
-        icon: iconMenuHomeOutlook,
-        iconWhite: iconMenuHomeOutlookWhite
     },
     {
         display: "Real Estate Agent",
@@ -67,6 +68,25 @@ const navbarItems = [
 ];
 
 export const Navbar: FC = () => {
+    const activeSection = useScrollSpy({
+        activeSectionDefault: "home",
+        sectionElements: Array.from(document.getElementsByTagName("section")),
+        offsetPx: -112
+    });
+
+    const scrollToView = (id: string) => {
+        const element = document.getElementById(id);
+        if (!element) return;
+        const headerOffset = 100;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+        });
+    };
+
     return (
         <Box
             style={{ boxShadow: "2px 2px 6px rgb(0 0 0 / 15%)" }}
@@ -75,24 +95,42 @@ export const Navbar: FC = () => {
             display="flex"
             flexDirection="column"
             height="100vh"
+            zIndex="zIndex10"
         >
-            {navbarItems.map(({ display, icon, iconWhite }) => (
-                <Box
-                    display="flex"
-                    flexDirection="column"
-                    justifyContent="center"
-                    alignItems="center"
-                    height="80px"
-                    key={display}
-                >
-                    <Box height="20px" as="img" src={icon} />
-                    <Box marginTop="space30" maxWidth="95px">
-                        <Text textAlign="center" fontSize="fontSize10" textTransform="uppercase" as="p">
-                            {display}
-                        </Text>
+            {navbarItems.map(({ display, icon, iconWhite, id }) => {
+                const isActive = id === activeSection;
+                return (
+                    <Box
+                        display="flex"
+                        flexDirection="column"
+                        justifyContent="center"
+                        alignItems="center"
+                        height="95px"
+                        key={display}
+                        cursor="pointer"
+                        onClick={() => {
+                            if (id) {
+                                scrollToView(id);
+                            }
+                        }}
+                        backgroundColor={isActive ? "colorBackgroundDestructive" : "colorBackground"}
+                    >
+                        <Box height="20px" as="img" src={isActive ? iconWhite : icon} />
+                        <Box marginTop="space30" maxWidth="95px">
+                            <Text
+                                textAlign="center"
+                                lineHeight="lineHeight10"
+                                fontSize="fontSize10"
+                                textTransform="uppercase"
+                                as="p"
+                                color={isActive ? "colorTextBrandInverse" : "colorText"}
+                            >
+                                {display}
+                            </Text>
+                        </Box>
                     </Box>
-                </Box>
-            ))}
+                );
+            })}
         </Box>
     );
 };
