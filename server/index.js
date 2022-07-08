@@ -1,9 +1,10 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
+
 const { validateRequestOriginMiddleware } = require("./middlewares/validateRequestOriginMiddleware");
 const { initWebchatController } = require("./controllers/initWebchatController");
 const { refreshTokenController } = require("./controllers/refreshTokenController");
-const cors = require("cors");
 const { allowedOrigins } = require("./helpers/getAllowedOrigins");
 
 const app = express();
@@ -16,7 +17,7 @@ app.use(
     })
 );
 app.listen(port, () => {
-    console.log(`Twilio Webchat App server running on port ${port}`);
+    console.log(`OWL bank website server running on port ${port}`);
 });
 
 app.post("/initWebchat", validateRequestOriginMiddleware, initWebchatController);

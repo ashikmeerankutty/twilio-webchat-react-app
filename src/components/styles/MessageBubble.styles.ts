@@ -27,12 +27,12 @@ export const getInnerContainerStyles = (belongToCurrentUser: boolean): BoxStyleP
     paddingBottom: "space30",
     paddingLeft: "space40",
     paddingRight: "space40",
-    backgroundColor: belongToCurrentUser ? "colorBackgroundPrimaryStronger" : "colorBackground",
+    backgroundColor: belongToCurrentUser ? "colorBackgroundPrimary" : "colorBackground",
     color: belongToCurrentUser ? "colorTextWeakest" : "colorText",
     borderRadius: "borderRadius30",
     marginLeft: belongToCurrentUser ? "auto" : "space0",
     marginRight: belongToCurrentUser ? "space0" : "auto",
-    maxWidth: "90%"
+    width: "80%"
 });
 
 export const authorStyles: TextStyleProps = {
@@ -61,4 +61,20 @@ export const readStatusStyles: TextStyleProps = {
     fontSize: "fontSize10",
     marginRight: "space20",
     color: "colorText"
+};
+
+export const clickableMessagesListStyles: BoxStyleProps = {
+    marginY: "space30",
+    width: "90%"
+};
+
+export const clickableMessagesStyles: BoxStyleProps = {
+    padding: "space40",
+    backgroundColor: "colorBackgroundPrimaryWeakest",
+    color: "colorTextLink",
+    borderRadius: "borderRadius20",
+    cursor: "pointer",
+    border: "none",
+    width: "100%",
+    textAlign: "left",
 };

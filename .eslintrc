@@ -33,7 +33,7 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/no-shadow": ["error"],
-    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": "warn",
     "import/no-duplicates": ["error"],
     "spaced-comment": "warn",
     "prefer-named-capture-group": "off"
