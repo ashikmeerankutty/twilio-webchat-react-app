@@ -10,15 +10,12 @@ import chevronUpIcon from "../../assets/icon-chevron-up-gray.svg";
 import chevronDownIcon from "../../assets/icon-chevron-down-gray.svg";
 import callIcon from "../../assets/icon-cta-call.svg";
 import { useWebsite } from "./WebsiteProvider/WebsiteProvider";
-import { Loading } from "./Loading";
 
 export const Header: FC = () => {
     const [infoExpanded, setInfoExpanded] = useState(false);
     const [showNameBar, setShowNameBar] = useState(false);
-    const { userId } = useParams();
-    const navigate = useNavigate();
 
-    const { userData, fetchAndUpdateUserData, userDataLoading } = useWebsite();
+    const { userData } = useWebsite();
 
     const onScroll = useCallback(() => {
         if (window.scrollY > 150) {
@@ -28,21 +25,6 @@ export const Header: FC = () => {
         }
     }, [setShowNameBar]);
 
-    const fetchUser = async () => {
-        if (!userId) {
-            navigate("/404");
-        }
-        try {
-            await fetchAndUpdateUserData(userId as string);
-        } catch {
-            navigate("/404");
-        }
-    };
-
-    useEffect(() => {
-        fetchUser();
-    }, []);
-
     useEffect(() => {
         window.addEventListener("scroll", onScroll);
 
@@ -51,8 +33,8 @@ export const Header: FC = () => {
         };
     }, [onScroll]);
 
-    if (!userData || userDataLoading) {
-        return <Loading />;
+    if (!userData) {
+        return null;
     }
 
     return (
