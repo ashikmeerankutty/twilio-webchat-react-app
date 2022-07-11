@@ -4,4 +4,6 @@ export interface UserData {
     role: string;
     nmls: string;
     phone: string;
+    address: string;
+    profilePic: string;
 }

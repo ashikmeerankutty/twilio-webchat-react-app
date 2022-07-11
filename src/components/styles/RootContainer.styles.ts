@@ -7,7 +7,7 @@ export const outerContainerStyles: BoxStyleProps = {
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-end",
-    zIndex: "zIndex90"
+    zIndex: "zIndex80"
 };
 
 export const innerContainerStyles: BoxStyleProps = {

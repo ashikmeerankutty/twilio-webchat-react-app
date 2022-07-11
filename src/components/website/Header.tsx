@@ -3,7 +3,6 @@ import { Anchor, Box, Column, Grid, Text } from "@twilio-paste/core";
 import { FC, useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import profileImage from "../../assets/profile-user.jpeg";
 import iconBBa from "../../assets/icon-cta-bba.svg";
 import iconDme from "../../assets/icon-cta-dme.svg";
 import iconContact from "../../assets/icon-cta-contact.svg";
@@ -11,6 +10,7 @@ import chevronUpIcon from "../../assets/icon-chevron-up-gray.svg";
 import chevronDownIcon from "../../assets/icon-chevron-down-gray.svg";
 import callIcon from "../../assets/icon-cta-call.svg";
 import { useWebsite } from "./WebsiteProvider/WebsiteProvider";
+import { Loading } from "./Loading";
 
 export const Header: FC = () => {
     const [infoExpanded, setInfoExpanded] = useState(false);
@@ -52,7 +52,7 @@ export const Header: FC = () => {
     }, [onScroll]);
 
     if (!userData || userDataLoading) {
-        return <div>Loading</div>;
+        return <Loading />;
     }
 
     return (
@@ -99,7 +99,7 @@ export const Header: FC = () => {
                         height="53px"
                     >
                         <Text as="h3" fontSize="fontSize50">
-                            John Lockhart
+                            {userData.name}
                         </Text>
                         <Box display="flex" alignItems="center" columnGap="space30">
                             <Text as="h3" fontWeight="fontWeightNormal" fontSize="fontSize60" color="colorTextLink">
@@ -115,7 +115,7 @@ export const Header: FC = () => {
                             </Text>
                             <Box style={{ fontWeight: 300 }} width="15px" src={callIcon} as="img" />
                             <Text as="h3" style={{ fontWeight: 300 }} fontSize="fontSize60">
-                                415.964.2016
+                                {userData.phone}
                             </Text>
                         </Box>
                     </Box>
@@ -125,12 +125,12 @@ export const Header: FC = () => {
                 <Grid gutter="space30" paddingY="space40">
                     <Column span={7}>
                         <Box display="flex" columnGap="space80">
-                            <Box maxWidth="120px" objectFit="cover" as="img" src={profileImage} />
+                            <Box maxWidth="120px" objectFit="cover" as="img" src={userData.profilePic} />
                             <Box display="flex" flexDirection="column" rowGap="space40">
                                 <Text fontWeight="fontWeightNormal" fontSize="fontSize80" as="h1">
-                                    John Lockhart
+                                    {userData.name}
                                 </Text>
-                                {["Credit Solutions Advisor", "NMLS ID: 1197973", "415.941.4036"].map((detail) => {
+                                {[userData.role, `NMLS ID: ${userData.nmls}`, userData.phone].map((detail) => {
                                     return (
                                         <Text
                                             style={{ fontWeight: 300 }}
@@ -151,17 +151,13 @@ export const Header: FC = () => {
                                     style={{ fontWeight: 300 }}
                                     color="colorTextLink"
                                 >
-                                    1640 Van Ness Ave, San Francisco, CA 94109
+                                    {userData.address}
                                 </Text>
                             </Box>
                         </Box>
                         <Box marginY="space80" paddingTop="space30">
                             <Text fontSize="fontSize60" lineHeight="lineHeight40" style={{ fontWeight: 300 }} as="p">
-                                I&apos;m John, and I&apos;m dedicated to helping people find the home loan that
-                                comfortably fits their needs in the San Francisco area. As a President&apos;s Club
-                                member and a trusted partner to many people in this community, I&apos;m here to guide
-                                you through every step of the home loan process. Call me today if you&apos;re ready to
-                                get started or would like more information.
+                                {userData.description}
                             </Text>
                             <Box
                                 marginY="space50"
