@@ -6,6 +6,7 @@ const { validateRequestOriginMiddleware } = require("./middlewares/validateReque
 const { initWebchatController } = require("./controllers/initWebchatController");
 const { refreshTokenController } = require("./controllers/refreshTokenController");
 const { allowedOrigins } = require("./helpers/getAllowedOrigins");
+const { getAgentInfo } = require("./controllers/getAgentInfo");
 
 const app = express();
 const port = 3001;
@@ -22,3 +23,4 @@ app.listen(port, () => {
 
 app.post("/initWebchat", validateRequestOriginMiddleware, initWebchatController);
 app.post("/refreshToken", validateRequestOriginMiddleware, refreshTokenController);
+app.post("/user", getAgentInfo);

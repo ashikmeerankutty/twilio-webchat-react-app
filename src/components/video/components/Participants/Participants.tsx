@@ -56,7 +56,7 @@ export const Participants: FC = () => {
                     },
                     {
                         onClick: () => {
-                            room!.disconnect();
+                            room?.disconnect();
                         },
                         text: "End Call",
                         icon: EndCallIcon,

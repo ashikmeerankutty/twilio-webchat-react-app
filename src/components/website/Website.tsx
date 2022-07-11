@@ -1,4 +1,4 @@
-import { Box, Column, Flex, Grid } from "@twilio-paste/core";
+import { Box, Flex } from "@twilio-paste/core";
 import { FC } from "react";
 import "./Website.css";
 
@@ -9,23 +9,26 @@ import { Help } from "./Help";
 import { WhatsNew } from "./WhatsNew";
 import { Footer } from "./Footer";
 import { Navbar } from "./Navbar";
+import { WebsiteProvider } from "./WebsiteProvider/WebsiteProvider";
 
 export const Website: FC = () => {
     return (
-        <Flex>
-            <Box>
-                <Navbar />
-            </Box>
-            <Box style={{ paddingLeft: "110px" }}>
+        <WebsiteProvider>
+            <Flex>
                 <Box>
-                    <Header />
-                    <Calculators />
-                    <Services />
-                    <Help />
-                    <WhatsNew />
-                    <Footer />
+                    <Navbar />
                 </Box>
-            </Box>
-        </Flex>
+                <Box style={{ paddingLeft: "110px" }}>
+                    <Box>
+                        <Header />
+                        <Calculators />
+                        <Services />
+                        <Help />
+                        <WhatsNew />
+                        <Footer />
+                    </Box>
+                </Box>
+            </Flex>
+        </WebsiteProvider>
     );
 };

@@ -9,10 +9,13 @@ import iconContact from "../../assets/icon-cta-contact.svg";
 import chevronUpIcon from "../../assets/icon-chevron-up-gray.svg";
 import chevronDownIcon from "../../assets/icon-chevron-down-gray.svg";
 import callIcon from "../../assets/icon-cta-call.svg";
+import { useWebsite } from "./WebsiteProvider/WebsiteProvider";
 
 export const Header: FC = () => {
     const [infoExpanded, setInfoExpanded] = useState(false);
     const [showNameBar, setShowNameBar] = useState(false);
+
+    const { userData, fetchAndUpdateUserData, userDataLoading } = useWebsite();
 
     const onScroll = useCallback(() => {
         if (window.scrollY > 150) {
@@ -23,12 +26,24 @@ export const Header: FC = () => {
     }, [setShowNameBar]);
 
     useEffect(() => {
+        try {
+            fetchAndUpdateUserData("jenn-riannon");
+        } catch {
+            console.log("Error loading");
+        }
+    }, []);
+
+    useEffect(() => {
         window.addEventListener("scroll", onScroll);
 
         return () => {
             window.removeEventListener("scroll", onScroll);
         };
     }, [onScroll]);
+
+    if (!userData || userDataLoading) {
+        return <div>Loading</div>;
+    }
 
     return (
         <Box as="section" id="home" width="100%">
