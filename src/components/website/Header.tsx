@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-max-depth */
 import { Anchor, Box, Column, Grid, Text } from "@twilio-paste/core";
 import { FC, useCallback, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import profileImage from "../../assets/profile-user.jpeg";
 import iconBBa from "../../assets/icon-cta-bba.svg";
@@ -14,6 +15,8 @@ import { useWebsite } from "./WebsiteProvider/WebsiteProvider";
 export const Header: FC = () => {
     const [infoExpanded, setInfoExpanded] = useState(false);
     const [showNameBar, setShowNameBar] = useState(false);
+    const { userId } = useParams();
+    const navigate = useNavigate();
 
     const { userData, fetchAndUpdateUserData, userDataLoading } = useWebsite();
 
@@ -25,12 +28,19 @@ export const Header: FC = () => {
         }
     }, [setShowNameBar]);
 
-    useEffect(() => {
-        try {
-            fetchAndUpdateUserData("jenn-riannon");
-        } catch {
-            console.log("Error loading");
+    const fetchUser = async () => {
+        if (!userId) {
+            navigate("/404");
         }
+        try {
+            await fetchAndUpdateUserData(userId as string);
+        } catch {
+            navigate("/404");
+        }
+    };
+
+    useEffect(() => {
+        fetchUser();
     }, []);
 
     useEffect(() => {

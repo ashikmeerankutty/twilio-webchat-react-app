@@ -21,7 +21,7 @@ export const useWebsite = () => {
 
 export const WebsiteProvider: FC = ({ children }) => {
     const [userData, setUserData] = useState<UserData | null>(null);
-    const [userDataLoading, setUserDataLoading] = useState(false);
+    const [userDataLoading, setUserDataLoading] = useState(true);
 
     const fetchAndUpdateUserData = useCallback(
         async (userId: string) => {
@@ -30,7 +30,7 @@ export const WebsiteProvider: FC = ({ children }) => {
                 const updatedUserData = await getUserData(userId);
                 setUserData(updatedUserData);
             } catch {
-                throw Error("Invalid user");
+                throw new Error("Invalid user");
             } finally {
                 setUserDataLoading(false);
             }

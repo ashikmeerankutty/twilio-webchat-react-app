@@ -8,6 +8,7 @@ import { initConfig } from "./store/actions/initActions";
 import { ConfigState } from "./store/definitions";
 import { initLogger } from "./logger";
 import { WebchatWidget } from "./components/WebchatWidget";
+import { PageRouter } from "./pageRouter";
 
 const defaultConfig: ConfigState = {
     serverUrl: "http://localhost:3001",
@@ -39,7 +40,7 @@ const initWebchat = async (config: ConfigState) => {
 
     render(
         <Provider store={store}>
-            <WebchatWidget />
+            <PageRouter />
         </Provider>,
         rootElement
     );
