@@ -1,6 +1,7 @@
+import log from "loglevel";
 import { Media, Message } from "@twilio/conversations";
 import { Box } from "@twilio-paste/core/box";
-import { ScreenReaderOnly } from "@twilio-paste/core";
+import { ScreenReaderOnly, Stack } from "@twilio-paste/core";
 import { useSelector } from "react-redux";
 import { Text } from "@twilio-paste/core/text";
 import { Flex } from "@twilio-paste/core/flex";
@@ -8,7 +9,7 @@ import { UserIcon } from "@twilio-paste/icons/esm/UserIcon";
 import { Key, KeyboardEvent, useEffect, useRef, useState } from "react";
 import { SuccessIcon } from "@twilio-paste/icons/esm/SuccessIcon";
 
-import { AppState } from "../store/definitions";
+import { AppState, ClickableMessage, MessageWithAttributes } from "../store/definitions";
 import { FilePreview } from "./FilePreview";
 import { parseMessageBody } from "../utils/parseMessageBody";
 import {
@@ -19,8 +20,11 @@ import {
     bodyStyles,
     outerContainerStyles,
     readStatusStyles,
-    bubbleAndAvatarContainerStyles
+    bubbleAndAvatarContainerStyles,
+    clickableMessagesStyles,
+    clickableMessagesListStyles
 } from "./styles/MessageBubble.styles";
+import { JoinMeeting } from "./video/components/JoinMeeting/JoinMeeting";
 
 const doubleDigit = (number: number) => `${number < 10 ? 0 : ""}${number}`;
 
@@ -39,12 +43,15 @@ export const MessageBubble = ({
 }) => {
     const [read, setRead] = useState(false);
     const [isMouseDown, setIsMouseDown] = useState(false);
-    const { conversationsClient, participants, users, fileAttachmentConfig } = useSelector((state: AppState) => ({
-        conversationsClient: state.chat.conversationsClient,
-        participants: state.chat.participants,
-        users: state.chat.users,
-        fileAttachmentConfig: state.config.fileAttachment
-    }));
+    const { conversationsClient, participants, users, fileAttachmentConfig, conversation } = useSelector(
+        (state: AppState) => ({
+            conversationsClient: state.chat.conversationsClient,
+            conversation: state.chat.conversation,
+            participants: state.chat.participants,
+            users: state.chat.users,
+            fileAttachmentConfig: state.config.fileAttachment
+        })
+    );
     const messageRef = useRef<HTMLDivElement>(null);
 
     const belongsToCurrentUser = message.author === conversationsClient?.user.identity;
@@ -111,6 +118,19 @@ export const MessageBubble = ({
 
     const author = users?.find((u) => u.identity === message.author)?.friendlyName || message.author;
 
+    const { clickableMessages, videoCallSettings } = (message as MessageWithAttributes).attributes || {};
+
+    const sendClickableMessage = async (clickableMessage: ClickableMessage): Promise<void> => {
+        if (!conversation) {
+            log.error("Failed sending message: no conversation found");
+            return;
+        }
+
+        let preparedMessage = conversation.prepareMessage();
+        preparedMessage = preparedMessage.setBody(clickableMessage.message);
+        await preparedMessage.build().send();
+    };
+
     return (
         <Box
             {...outerContainerStyles}
@@ -151,6 +171,25 @@ export const MessageBubble = ({
                     {message.type === "media" ? renderMedia() : null}
                 </Box>
             </Box>
+            {/** render clickable messages only if the message is the last message */}
+            {isLast && clickableMessages && (
+                <Box {...clickableMessagesListStyles}>
+                    <Stack orientation="vertical" spacing="space20">
+                        {clickableMessages.map((clickableMessage: ClickableMessage) => (
+                            <Box
+                                as="button"
+                                tabIndex={focusable ? 0 : -1}
+                                {...clickableMessagesStyles}
+                                onClick={async (): Promise<void> => sendClickableMessage(clickableMessage)}
+                                key={clickableMessage.key}
+                            >
+                                {clickableMessage.message}
+                            </Box>
+                        ))}
+                    </Stack>
+                </Box>
+            )}
+            {isLast && videoCallSettings && <JoinMeeting {...videoCallSettings} />}
             {read && (
                 <Flex hAlignContent="right" vAlignContent="center" marginTop="space20">
                     <Text as="p" {...readStatusStyles}>

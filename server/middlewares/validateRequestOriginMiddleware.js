@@ -1,4 +1,5 @@
 const { allowedOrigins } = require("../helpers/getAllowedOrigins");
+
 const validateRequestOriginMiddleware = (request, response, next) => {
     if (!process.env.ALLOWED_ORIGINS) {
         console.error("Please specify at least one ALLOWED_ORIGINS in your environment");
@@ -17,6 +18,7 @@ const validateRequestOriginMiddleware = (request, response, next) => {
     response.setHeader("Content-Type", "application/json");
 
     next();
+    return null;
 };
 
 module.exports = { validateRequestOriginMiddleware };

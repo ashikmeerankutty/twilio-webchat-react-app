@@ -4,10 +4,26 @@ import { AlertVariants } from "@twilio-paste/core/alert";
 
 import { FileAttachmentConfig } from "../definitions";
 
+export type ClickableMessage = {
+    key: string;
+    message: string;
+};
+
+type MessageAttributes = {
+    clickableMessages: ClickableMessage[];
+    videoCallSettings: {
+        roomName: string;
+    };
+};
+
+export type MessageWithAttributes = Message & {
+    attributes: MessageAttributes;
+};
+
 export enum EngagementPhase {
-    PreEngagementForm = "PreEngagementForm",
     MessagingCanvas = "MessagingCanvas",
-    Loading = "Loading"
+    Loading = "Loading",
+    EndMessage = "EndMessage"
 }
 
 export type ChatState = {

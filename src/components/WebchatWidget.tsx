@@ -1,12 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { CustomizationProvider, CustomizationProviderProps } from "@twilio-paste/core/customization";
-import { CSSProperties, FC, useEffect } from "react";
+import { CSSProperties, FC, useEffect, useCallback } from "react";
 
 import { RootContainer } from "./RootContainer";
-import { AppState, EngagementPhase } from "../store/definitions";
+import { AppState } from "../store/definitions";
 import { sessionDataHandler } from "../sessionDataHandler";
 import { initSession } from "../store/actions/initActions";
-import { changeEngagementPhase } from "../store/actions/genericActions";
 
 const AnyCustomizationProvider: FC<CustomizationProviderProps & { style: CSSProperties }> = CustomizationProvider;
 
@@ -14,20 +13,27 @@ export function WebchatWidget() {
     const theme = useSelector((state: AppState) => state.config.theme);
     const dispatch = useDispatch();
 
+    const createNewChatSession = useCallback(async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const params = Object.fromEntries(urlParams);
+        const data = await sessionDataHandler.fetchAndStoreNewSession(params);
+        dispatch(initSession({ token: data.token, conversationSid: data.conversationSid }));
+    }, [dispatch]);
+
     useEffect(() => {
         const data = sessionDataHandler.tryResumeExistingSession();
         if (data) {
             try {
                 dispatch(initSession({ token: data.token, conversationSid: data.conversationSid }));
             } catch (e) {
-                // if initSession fails, go to changeEngagement phase - most likely there's something wrong with the store token or conversation sis
-                dispatch(changeEngagementPhase({ phase: EngagementPhase.PreEngagementForm }));
+                // if initSession fails, create a new chat session - most likely there's something wrong with the store token or conversation sis
+                createNewChatSession();
             }
         } else {
-            // if no token is stored, got engagement form
-            dispatch(changeEngagementPhase({ phase: EngagementPhase.PreEngagementForm }));
+            // if no token is stored, create a new chat session
+            createNewChatSession();
         }
-    }, [dispatch]);
+    }, [dispatch, createNewChatSession]);
 
     return (
         <AnyCustomizationProvider
@@ -48,6 +54,27 @@ export function WebchatWidget() {
                 BUTTON: {
                     "&[aria-disabled='true'][color='colorTextLink']": {
                         color: "colorTextLinkWeak"
+                    },
+                    variants: {
+                        primary: {
+                            boxShadow: "none",
+                            fontWeight: "fontWeightLight",
+                            ":hover": {
+                                boxShadow: "none"
+                            }
+                        },
+                        secondary: {
+                            borderColor: "colorBorderPrimary",
+                            borderWidth: "borderWidth10",
+                            borderStyle: "solid",
+                            color: "colorTextBrandHighlight",
+                            boxShadow: "none",
+                            ":hover": {
+                                boxShadow: "none",
+                                color: "colorTextBrandHighlight",
+                                backgroundColor: "colorBackgroundPrimaryWeaker"
+                            }
+                        }
                     }
                 }
             }}

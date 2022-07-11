@@ -6,7 +6,7 @@ const LOCAL_STORAGE_ITEM_ID = "TWILIO_WEBCHAT_WIDGET";
 
 let _endpoint = "";
 
-async function contactBackend<T>(endpointRoute: string, body: Record<string, unknown> = {}): Promise<T> {
+export async function contactBackend<T>(endpointRoute: string, body: Record<string, unknown> = {}): Promise<T> {
     const response = await fetch(_endpoint + endpointRoute, {
         method: "POST",
         headers: {
@@ -101,13 +101,12 @@ export const sessionDataHandler = {
         return updatedSessionData;
     },
 
-    fetchAndStoreNewSession: async ({ formData }: { formData: Record<string, unknown> }) => {
+    fetchAndStoreNewSession: async (params?: Record<string, string>) => {
         log.debug("sessionDataHandler: trying to create new session");
 
         let newTokenData;
-
         try {
-            newTokenData = await contactBackend<Token>("/initWebchat", { formData });
+            newTokenData = await contactBackend<Token>("/initWebchat", { formData: params });
         } catch (e) {
             throw Error("No results from server");
         }

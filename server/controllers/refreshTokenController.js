@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+
 const { TOKEN_TTL_IN_SECONDS } = require("../constants");
 const { createToken } = require("../helpers/createToken");
 const { logInitialAction, logFinalAction, logInterimAction } = require("../helpers/logs");
@@ -30,6 +31,7 @@ const refreshTokenController = async (request, response) => {
     });
 
     logFinalAction("Token refreshed");
+    return null;
 };
 
 module.exports = { refreshTokenController };

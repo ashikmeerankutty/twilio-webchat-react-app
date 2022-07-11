@@ -3,10 +3,14 @@ import { useSelector } from "react-redux";
 
 import { MessagingCanvasPhase } from "./MessagingCanvasPhase";
 import { AppState, EngagementPhase } from "../store/definitions";
-import { PreEngagementFormPhase } from "./PreEngagementFormPhase";
 import { LoadingPhase } from "./LoadingPhase";
 import { EntryPoint } from "./EntryPoint";
 import { innerContainerStyles, outerContainerStyles } from "./styles/RootContainer.styles";
+import { Website } from "./website/Website";
+import { EndMessagePhase } from "./EndMessagePhase";
+import { AppStateProvider } from "./video/state";
+import { VideoProvider } from "./video/components/VideoProvider/VideoProvider";
+import { VideoChatWidget } from "./video/components/VideoChatWidget/VideoChatWidget";
 
 const getPhaseComponent = (phase: EngagementPhase) => {
     switch (phase) {
@@ -14,9 +18,10 @@ const getPhaseComponent = (phase: EngagementPhase) => {
             return <LoadingPhase />;
         case EngagementPhase.MessagingCanvas:
             return <MessagingCanvasPhase />;
-        case EngagementPhase.PreEngagementForm:
+        case EngagementPhase.EndMessage:
+            return <EndMessagePhase />;
         default:
-            return <PreEngagementFormPhase />;
+            return <MessagingCanvasPhase />;
     }
 };
 
@@ -27,15 +32,21 @@ export function RootContainer() {
     }));
 
     return (
-        <Box>
-            <Box {...outerContainerStyles}>
-                {expanded && (
-                    <Box data-test="root-container" {...innerContainerStyles}>
-                        {getPhaseComponent(currentPhase)}
+        <AppStateProvider>
+            <VideoProvider>
+                <Box>
+                    <Website />
+                    <Box {...outerContainerStyles}>
+                        <VideoChatWidget />
+                        {expanded && (
+                            <Box data-test="root-container" {...innerContainerStyles}>
+                                {getPhaseComponent(currentPhase)}
+                            </Box>
+                        )}
+                        <EntryPoint />
                     </Box>
-                )}
-                <EntryPoint />
-            </Box>
-        </Box>
+                </Box>
+            </VideoProvider>
+        </AppStateProvider>
     );
 }
