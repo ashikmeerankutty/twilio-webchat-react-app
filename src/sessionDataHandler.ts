@@ -101,12 +101,18 @@ export const sessionDataHandler = {
         return updatedSessionData;
     },
 
-    fetchAndStoreNewSession: async (params?: Record<string, string>) => {
+    fetchAndStoreNewSession: async (params?: Record<string, string | undefined>) => {
         log.debug("sessionDataHandler: trying to create new session");
+        const agentId = window.location.pathname?.replace("/", "");
 
         let newTokenData;
         try {
-            newTokenData = await contactBackend<Token>("/initWebchat", { formData: params });
+            newTokenData = await contactBackend<Token>("/initWebchat", {
+                formData: {
+                    ...params,
+                    agentId
+                }
+            });
         } catch (e) {
             throw Error("No results from server");
         }
