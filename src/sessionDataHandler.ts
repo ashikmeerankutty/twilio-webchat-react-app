@@ -1,6 +1,7 @@
 import log from "loglevel";
 
 import { Token } from "./definitions";
+import { getAgentId } from "./utils/getAgentId";
 
 const LOCAL_STORAGE_ITEM_ID = "TWILIO_WEBCHAT_WIDGET";
 
@@ -23,13 +24,9 @@ export async function contactBackend<T>(endpointRoute: string, body: Record<stri
     return response.json();
 }
 
-function storeSessionData(data: Token) {
-    localStorage.setItem(LOCAL_STORAGE_ITEM_ID, JSON.stringify(data));
-}
-
 function getStoredSessionData() {
     const item = localStorage.getItem(LOCAL_STORAGE_ITEM_ID);
-    let storedData: Token;
+    let storedData: Record<string, Token>;
 
     if (!item) {
         return null;
@@ -45,6 +42,29 @@ function getStoredSessionData() {
     return storedData;
 }
 
+function getStoredSessionDataForAgent() {
+    const agentId = getAgentId();
+    const sessionData = getStoredSessionData();
+    if (!sessionData || !sessionData[agentId]) {
+        return null;
+    }
+    return sessionData[agentId];
+}
+
+function storeSessionData(data: Token) {
+    const currentSessionData = getStoredSessionData();
+    let newSessionData = {
+        [data.agentId]: { ...data }
+    };
+    if (currentSessionData) {
+        newSessionData = {
+            ...currentSessionData,
+            ...newSessionData
+        };
+    }
+    localStorage.setItem(LOCAL_STORAGE_ITEM_ID, JSON.stringify(newSessionData));
+}
+
 export const sessionDataHandler = {
     setEndpoint(endpoint: string = "") {
         _endpoint = endpoint;
@@ -56,7 +76,7 @@ export const sessionDataHandler = {
 
     tryResumeExistingSession(): Token | null {
         log.debug("sessionDataHandler: trying to refresh existing session");
-        const storedTokenData = getStoredSessionData();
+        const storedTokenData = getStoredSessionDataForAgent();
 
         if (!storedTokenData) {
             log.debug("sessionDataHandler: no tokens stored, no session to refresh");
@@ -74,7 +94,7 @@ export const sessionDataHandler = {
 
     async getUpdatedToken(): Promise<Token> {
         log.debug("sessionDataHandler: trying to get updated token from BE");
-        const storedTokenData = getStoredSessionData();
+        const storedTokenData = getStoredSessionDataForAgent();
 
         if (!storedTokenData) {
             throw Error("Can't update token: current token doesn't exist");

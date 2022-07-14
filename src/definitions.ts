@@ -1,4 +1,5 @@
 export type Token = {
+    agentId: string;
     token: string;
     conversationSid: string;
     identity: string;

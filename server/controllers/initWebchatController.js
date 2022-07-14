@@ -107,7 +107,8 @@ const initWebchatController = async (request, response) => {
     response.send({
         token,
         conversationSid,
-        expiration: Date.now() + TOKEN_TTL_IN_SECONDS * 1000
+        expiration: Date.now() + TOKEN_TTL_IN_SECONDS * 1000,
+        agentId: request.body?.formData?.agentId
     });
 
     logFinalAction("Webchat successfully initiated");
