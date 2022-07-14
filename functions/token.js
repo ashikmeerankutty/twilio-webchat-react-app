@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/no-require-imports */
-/* eslint-disable global-require */
 function sendResponse(data) {
     const response = new Twilio.Response();
     response.appendHeader("Access-Control-Allow-Origin", "*");
@@ -11,7 +8,6 @@ function sendResponse(data) {
 }
 
 exports.handler = function (context, event, callback) {
-    console.log(event);
 
     const { AccessToken } = require("twilio").jwt;
     const { VideoGrant } = AccessToken;
